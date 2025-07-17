@@ -1,14 +1,14 @@
 name: Release
 
 permissions:
-  contents: write  # 生成 GitHub Release 需要
-  packages: write  # 发布 GitHub Packages 所需
-  id-token: write  # jsr need
+  contents: write # 生成 GitHub Release 需要
+  packages: write # 发布 GitHub Packages 所需
+  id-token: write # jsr need
 
 on:
   push:
     tags:
-      - 'v*'  # 监听所有 v 开头的 tag
+      - 'v*' # 监听所有 v 开头的 tag
 
 jobs:
   release:
@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 确保拿到所有 tag
+          fetch-depth: 0 # 确保拿到所有 tag
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
