@@ -1,20 +1,19 @@
 {
-  "name": "tsdown-starter",
-  "version": "0.0.0",
-  "packageManager": "pnpm@10.13.1",
-  "description": "A starter for creating a tsdown package.",
+  "name": "lru-linked-hash",
+  "version": "0.1.0",
+  "packageManager": "bun@1.2.18",
+  "description": "🚀 A fast and lightweight LRU Cache written in TypeScript, built with a doubly linked list and HashMap for O(1) get/set operations.",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://github.com/gugustinette/create-tsdown#readme",
+  "homepage": "https://github.com/xj63/lru-linked-hash",
   "bugs": {
-    "url": "https://github.com/gugustinette/create-tsdown/issues"
+    "url": "https://github.com/xj63/lru-linked-hash/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gugustinette/create-tsdown.git"
+    "url": "git+https://github.com/xj63/lru-linked-hash.git"
   },
-  "author": "三咲智子 Kevin Deng <sxzz@sxzz.moe>",
-  "funding": "https://github.com/sponsors/sxzz",
+  "author": "xj63 <xj63work@163.com>",
   "files": [
     "dist"
   ],
