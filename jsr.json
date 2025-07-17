@@ -1,0 +1,5 @@
+{
+  "name": "@xj63/lru-cache",
+  "license": "MIT",
+  "exports": "./src/index.ts"
+}

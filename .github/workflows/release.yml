@@ -3,6 +3,7 @@ name: Release
 permissions:
   contents: write  # 生成 GitHub Release 需要
   packages: write  # 发布 GitHub Packages 所需
+  id-token: write  # jsr need
 
 on:
   push:
@@ -38,3 +39,6 @@ jobs:
         run: bunx changelogithub
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to JSR Package
+        run: bunx jsr publish
