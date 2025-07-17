@@ -1,5 +1,6 @@
 {
   "name": "@xj63/lru-cache",
+  "version": "1.0.4-beta.3",
   "license": "MIT",
   "exports": "./src/index.ts"
 }
