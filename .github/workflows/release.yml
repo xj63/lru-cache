@@ -1,26 +1,40 @@
 name: Release
 
 permissions:
-  contents: write
+  contents: write  # 生成 GitHub Release 需要
+  packages: write  # （可选，针对 GitHub Packages）
 
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*'  # 监听所有 v 开头的 tag
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # 确保拿到所有 tag
 
-      - name: Set node
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: lts/*
+          bun-version: latest
 
-      - run: npx changelogithub
+      - name: Install dependencies
+        run: bun install
+
+      - name: Build
+        run: bun run build
+
+      - name: Publish to npm
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub Release with changelog
+        run: npx changelogithub
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
