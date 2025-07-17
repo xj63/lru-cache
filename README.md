@@ -1,4 +1,4 @@
-# lru-linked-hash
+# lru-cache
 
 🚀 一个基于 TypeScript 实现的、快速且轻量级的 LRU (Least Recently Used) 缓存。
 
@@ -18,13 +18,13 @@
 
 ```bash
 # pnpm
-pnpm add lru-linked-hash
+pnpm add @xj63/lru-cache
 
 # yarn
-yarn add lru-linked-hash
+yarn add @xj63/lru-cache
 
 # npm
-npm install lru-linked-hash
+npm install @xj63/lru-cache
 ```
 
 ## 🚀 使用
@@ -32,7 +32,7 @@ npm install lru-linked-hash
 ### 基础用法
 
 ```typescript
-import { LRUCache } from 'lru-linked-hash';
+import { LRUCache } from '@xj63/lru-cache';
 
 // 创建一个容量为 3 的缓存
 const cache = new LRUCache<string, number>(3);
@@ -61,7 +61,7 @@ console.log(cache.keys()); // ['d', 'a', 'c'] (最近访问的在前)
 `LRUCache` 支持泛型，可以轻松处理复杂类型。
 
 ```typescript
-import { LRUCache } from 'lru-linked-hash';
+import { LRUCache } from '@xj63/lru-cache';
 
 interface User {
   id: number;
@@ -82,7 +82,7 @@ console.log(user?.name); // 'Alice'
 缓存实例支持 `for...of` 循环，遍历顺序为**从最近使用到最久未使用**。
 
 ```typescript
-import { LRUCache } from 'lru-linked-hash';
+import { LRUCache } from '@xj63/lru-cache';
 
 const cache = new LRUCache<string, string>(3);
 cache.set('first', 'A');
@@ -160,8 +160,8 @@ console.log(cache.entries()); // [['third', 'C'], ['second', 'B'], ['first', 'A'
 
 1.  **克隆仓库**
     ```bash
-    git clone https://github.com/xj63/lru-linked-hash.git
-    cd lru-linked-hash
+    git clone https://github.com/xj63/lru-cache.git
+    cd lru-cache
     ```
 
 2.  **安装依赖**

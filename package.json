@@ -1,17 +1,17 @@
 {
-  "name": "lru-linked-hash",
+  "name": "@xj63/lru-cache",
   "version": "1.0.2",
   "packageManager": "bun@1.2.18",
   "description": "🚀 A fast and lightweight LRU Cache written in TypeScript, built with a doubly linked list and HashMap for O(1) get/set operations.",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://github.com/xj63/lru-linked-hash",
+  "homepage": "https://github.com/xj63/lru-cache",
   "bugs": {
-    "url": "https://github.com/xj63/lru-linked-hash/issues"
+    "url": "https://github.com/xj63/lru-cache/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xj63/lru-linked-hash.git"
+    "url": "git+https://github.com/xj63/lru-cache.git"
   },
   "author": "xj63 <xj63work@163.com>",
   "files": [
@@ -25,7 +25,8 @@
     "./package.json": "./package.json"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "lint": "eslint --cache .",
@@ -35,7 +36,7 @@
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "format": "prettier --cache --write .",
-    "release": "bumpp && bun publish",
+    "release": "bumpp",
     "prepublishOnly": "bun run build"
   },
   "devDependencies": {

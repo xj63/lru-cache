@@ -2,7 +2,7 @@ name: Release
 
 permissions:
   contents: write  # 生成 GitHub Release 需要
-  packages: write  # （可选，针对 GitHub Packages）
+  packages: write  # 发布 GitHub Packages 所需
 
 on:
   push:
@@ -29,12 +29,12 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Publish to npm
-        run: npm publish --access public
+      - name: Publish to GitHub Packages
+        run: bun publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create GitHub Release with changelog
-        run: npx changelogithub
+        run: bunx changelogithub
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
