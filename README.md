@@ -1,4 +1,4 @@
-# lru-cache
+# lru-cache [![Unit Test](https://github.com/xj63/lru-cache/actions/workflows/tests.yml/badge.svg)](https://github.com/xj63/lru-cache/actions/workflows/tests.yml) [![JSR](https://jsr.io/badges/@xj63/lru-cache)](https://jsr.io/@xj63/lru-cache)
 
 🚀 一个基于 TypeScript 实现的、快速且轻量级的 LRU (Least Recently Used) 缓存。
 
