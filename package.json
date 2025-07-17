@@ -1,6 +1,6 @@
 {
   "name": "lru-linked-hash",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "packageManager": "bun@1.2.18",
   "description": "🚀 A fast and lightweight LRU Cache written in TypeScript, built with a doubly linked list and HashMap for O(1) get/set operations.",
   "type": "module",
