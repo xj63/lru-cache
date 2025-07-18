@@ -45,8 +45,8 @@ jobs:
 
           mkdir -p badges
 
-          bun .github/scripts/gen-badge.ts "minify" "$MINIFY_KB" "#007ec6" "#555" "badges/minify.svg"
-          bun .github/scripts/gen-badge.ts "gzip" "$GZIP_KB" "#4c1" "#555" "badges/gzip.svg"
+          curl -s "https://img.shields.io/static/v1?label=minify&message=${MINIFY_KB}kB&labelColor=007ec6&color=555" -o badges/minify.svg
+          curl -s "https://img.shields.io/static/v1?label=gzip&message=${GZIP_KB}kB&labelColor=4c1&color=555" -o badges/gzip.svg
 
       - name: Deploy badge to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
