@@ -54,5 +54,5 @@ jobs:
           publish_dir: ./badge
           publish_branch: gh-pages
           destination_dir: .
-          clean: true # 会删除 gh-pages 分支所有内容后重新推送
+          force_orphan: true # 会删除 gh-pages 分支所有内容后重新推送
           commit_message: 'chore: update bundle size badge'
