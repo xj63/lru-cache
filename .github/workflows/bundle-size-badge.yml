@@ -36,26 +36,17 @@ jobs:
       - name: Calculate sizes with size-limit
         run: bunx size-limit --json > size.json
 
-      - name: Extract sizes and generate badges
+      - name: Generate SVG Badges
         run: |
           MIN_SIZE=$(jq '.[0].size' size.json)
           GZIP_SIZE=$(jq '.[1].size' size.json)
-          MIN_KB=$(awk "BEGIN {printf \"%.1f\", $MIN_SIZE/1024}")
+          MINIFY_KB=$(awk "BEGIN {printf \"%.1f\", $MIN_SIZE/1024}")
           GZIP_KB=$(awk "BEGIN {printf \"%.1f\", $GZIP_SIZE/1024}")
 
-          mkdir -p badge
+          mkdir -p badges
 
-          # Badge 1: Minified Size
-          npx badgen-cli \
-            --label "minified" \
-            --status "${MIN_KB} KB" \
-            --color "blue" > badge/minified.svg
-
-          # Badge 2: Gzipped Size
-          npx badgen-cli \
-            --label "gzipped" \
-            --status "${GZIP_KB} KB" \
-            --color "green" > badge/gzipped.svg
+          bun .github/scripts/gen-badge.ts "minify" "$MINIFY_SIZE" "#007ec6" "badges/minify.svg"
+          bun .github/scripts/gen-badge.ts "gzip" "$GZIP_SIZE" "#4c1" "badges/gzip.svg"
 
       - name: Deploy badge to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
