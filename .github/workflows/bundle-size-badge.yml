@@ -30,13 +30,13 @@ jobs:
       - name: Install dependencies with Bun
         run: bun install
 
-      - name: Build project
+      - name: Build project minify
         run: bun run build --minify
 
       - name: Calculate sizes with size-limit
         run: bunx size-limit --json > size.json
 
-      - name: Extract sizes and generate badge
+      - name: Extract sizes and generate badges
         run: |
           MIN_SIZE=$(jq '.[0].size' size.json)
           GZIP_SIZE=$(jq '.[1].size' size.json)
@@ -44,10 +44,18 @@ jobs:
           GZIP_KB=$(awk "BEGIN {printf \"%.1f\", $GZIP_SIZE/1024}")
 
           mkdir -p badge
+
+          # Badge 1: Minified Size
           npx badgen-cli \
-            --label "bundle size" \
-            --status "${MIN_KB} KB (gzip: ${GZIP_KB} KB)" \
-            --color green > badge/bundle-size.svg
+            --label "minified" \
+            --status "${MIN_KB} KB" \
+            --color "blue" > badge/minified.svg
+
+          # Badge 2: Gzipped Size
+          npx badgen-cli \
+            --label "gzipped" \
+            --status "${GZIP_KB} KB" \
+            --color "green" > badge/gzipped.svg
 
       - name: Deploy badge to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
