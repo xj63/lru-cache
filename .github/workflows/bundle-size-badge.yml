@@ -1,0 +1,58 @@
+name: Bundle Size Badge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  bundle-size:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Cache Bun dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+
+      - name: Install dependencies with Bun
+        run: bun install
+
+      - name: Build project
+        run: bun run build --minify
+
+      - name: Calculate sizes with size-limit
+        run: bunx size-limit --json > size.json
+
+      - name: Extract sizes and generate badge
+        run: |
+          MIN_SIZE=$(jq '.[0].size' size.json)
+          GZIP_SIZE=$(jq '.[1].size' size.json)
+          MIN_KB=$(awk "BEGIN {printf \"%.1f\", $MIN_SIZE/1024}")
+          GZIP_KB=$(awk "BEGIN {printf \"%.1f\", $GZIP_SIZE/1024}")
+
+          mkdir -p badge
+          npx badgen-cli \
+            --label "bundle size" \
+            --status "${MIN_KB} KB (gzip: ${GZIP_KB} KB)" \
+            --color green > badge/bundle-size.svg
+
+      - name: Deploy badge to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./badge
+          publish_branch: gh-pages
+          destination_dir: .
+          clean: true # 会删除 gh-pages 分支所有内容后重新推送
+          commit_message: 'chore: update bundle size badge'
