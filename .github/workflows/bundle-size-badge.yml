@@ -52,7 +52,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./badge
+          publish_dir: ./badges
           publish_branch: gh-pages
           destination_dir: .
           force_orphan: true # 会删除 gh-pages 分支所有内容后重新推送
