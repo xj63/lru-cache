@@ -1,4 +1,4 @@
 {
-  extends: ['github>xj63/lru-linked-hash'],
+  extends: ['github>xj63/lru-cache'],
   automerge: true,
 }
